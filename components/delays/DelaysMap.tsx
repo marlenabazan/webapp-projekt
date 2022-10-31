@@ -12,7 +12,6 @@ import delaysModel from '../../models/delays';
 
 
 export default function DelaysMap({ route, navigation }) {
-    // const { reload } = route.params || false;
     const [allDelays, setAllDelays] = useState([]);
     const [locationMarker, setLocationMarker] = useState(null);
     const [stationsNames, setStationsNames] = useState({});
@@ -69,25 +68,13 @@ export default function DelaysMap({ route, navigation }) {
 
         return coordinatesArr;
     };   
-    // console.log(allDelays);
    
     const markers = allDelays.map((delay, index) => {
-        // console.log(delay);
-
         let stationName = delay.AdvertisedLocationName;
-
-        // if (!markersOnce.includes(stationName)) {
-        //     markersOnce.push(stationName);
-        // };
-        // console.log(testMarkers);
-    
         let coordinates = formatCoordinates(delay);
-        
         let oldTime = moment(delay.AdvertisedTimeAtLocation).format('HH:mm');
         let newTime = moment(delay.EstimatedTimeAtLocation).format('HH:mm');
-        // console.log(delay.ToLocation[0].LocationName);
         let toStation = stationsNames[delay.ToLocation[0].LocationName]
-        // console.log(toStation);
         
         return <Marker
                     key={index} 
@@ -98,27 +85,21 @@ export default function DelaysMap({ route, navigation }) {
                     title={stationName}
                     >
                         <Callout style={Base.callout}>
-                                <Text style={Typography.stationName}>{delay.AdvertisedLocationName}</Text>
+                                <Text style={Typography.stationName}>{stationName}</Text>
                                 <Text>
                                     <Text>Till: {toStation} </Text>
                                     <Text style={Typography.oldTime}>{oldTime}</Text>
-                                    <Text>- {newTime}</Text>
+                                    <Text> {newTime}</Text>
                                 </Text>
                         </Callout>
                 </Marker>
     });
 
-    // const listOfDelays = allDelays.map((delay, index) => {
-    //     return <View key={index}>
-    //             <Text>{delay.AdvertisedLocationName}</Text>
-    //         </View>
-    // });
 
     return (
         <View style={Base.base}>
-            <Text style={Typography.normal}>* För att se alla förseningar från en station klicka på stationens marker flera gånger eller gå till 
-            {/* <Text style={Base.link} onPress={() => navigation.navigate('UseTime')}> link </Text> */}
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Text style={Typography.normal}>* För att se alla förseningar gå till 
+                <TouchableOpacity onPress={() => navigation.navigate('DelaysList')}>
                     <Text style={Base.link}>        lista</Text>
                 </TouchableOpacity> 
             </Text>
@@ -127,12 +108,12 @@ export default function DelaysMap({ route, navigation }) {
                     ref={map}
                     // key={marker}
                     style={styles.map}
-                    // initialRegion={{
-                    //     latitude: 56.1612,
-                    //     longitude: 15.5869,
-                    //     latitudeDelta: 2.1,
-                    //     longitudeDelta: 2.1,
-                    // }}
+                    initialRegion={{
+                        latitude: 62.755508,
+                        longitude: 14.390204,
+                        latitudeDelta: 15.1,
+                        longitudeDelta: 15.1,
+                    }}
                     >
                     {locationMarker}
                     {markers}
@@ -151,4 +132,4 @@ const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
     },
-});
+}); 

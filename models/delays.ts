@@ -1,11 +1,11 @@
 import config from '../config/config.json';
 import Stations from "../interfaces/stations";
+import moment from 'moment';
 
 const delays = {
     getDelays: async function getDelays() {
         const response = await fetch(`${config.base_url}/delayed`);
         const result = await response.json();
-        // console.log(result.data);
         
         return result.data;
     },
@@ -30,13 +30,6 @@ const delays = {
 
         return delayedStations;
     },
-    getOneStation: async function getOneStation(short) {
-        const allStations = await this.getStations();
-
-        const stationName = allStations.find(({ LocationSignature }) => LocationSignature === short);
-
-        return stationName.AdvertisedLocationName;
-    },
     getStationsNames: async function getStationsNames() {
         const allStations = await this.getStations();
         const stationsNames = {};
@@ -50,6 +43,18 @@ const delays = {
         // console.log(stationsNames);
        
         return stationsNames;
+    },
+    getAllDelaysFromStation: async function getAllDelaysFromStation(signature) {
+        const allDelays = await this.getDelays();
+        const allStations = await this.getStations();
+        const allDelaysFromStation = allDelays
+            .filter(station => station.FromLocation !== undefined)
+            .filter(station => station.FromLocation[0].LocationName === signature)
+            .map((station) => ({
+                ...station,
+            })
+        )
+        return allDelaysFromStation;
     }
 };
 
