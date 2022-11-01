@@ -26,8 +26,6 @@ const delays = {
                 ...delay,
             }));
 
-        // console.log(delayedStations);
-
         return delayedStations;
     },
     getStationsNames: async function getStationsNames() {
@@ -36,17 +34,11 @@ const delays = {
         for (let station of allStations) {
             stationsNames[station.LocationSignature] = station.AdvertisedLocationName;
         }
-        // const stationsNames = allStations.map(({ LocationSignature, AdvertisedLocationName }) => ({ LocationSignature: LocationSignature, AdvertisedLocationName: AdvertisedLocationName }));
-
-        // const testname = stationsNames.find(({ LocationSignature }) => LocationSignature == "Bml");
-
-        // console.log(stationsNames);
        
         return stationsNames;
     },
     getAllDelaysFromStation: async function getAllDelaysFromStation(signature) {
-        const allDelays = await this.getDelays();
-        const allStations = await this.getStations();
+        const allDelays = await this.getDelayedStations();
         const allDelaysFromStation = allDelays
             .filter(station => station.FromLocation !== undefined)
             .filter(station => station.FromLocation[0].LocationName === signature)

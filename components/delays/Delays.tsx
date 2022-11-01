@@ -1,20 +1,18 @@
-// import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { Text } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-// import DelaysMap from './DelaysMap';
-// import UseTimeMap from './UseTimeMap';
+import DelaysList from './DelaysList';
+import UseTime from './UseTimeMap';
 
+const Stack = createNativeStackNavigator();
 
-// const Stack = createNativeStackNavigator();
-
-// export default function Delays() {
-//     return (
-//         <Stack.Navigator initialRouteName="DelaysOld"
-//             screenOptions={{
-//                 headerShown: false
-//             }}>
-//             <Stack.Screen name="Map" component={DelaysMap} />
-//             <Stack.Screen name="UseTime" component={UseTimeMap} />
-//         </Stack.Navigator>
-//     );
-// };
+export default function Delays() {
+    return (
+        <Stack.Navigator initialRouteName="Delays"
+            screenOptions={{
+                headerShown: false
+            }}>
+            <Stack.Screen name="DelaysList" component={DelaysList} />
+            <Stack.Screen name="UseTime" component={UseTime} />
+        </Stack.Navigator>
+    );
+};

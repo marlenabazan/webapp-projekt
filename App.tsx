@@ -11,7 +11,7 @@ import { Base } from './styles';
 
 import Home from './components/Home';
 import DelaysMap from './components/delays/DelaysMap';
-import DelaysList from './components/delays/DelaysList';
+import DelaysList from './components/delays/Delays';
 import Auth from "./components/auth/Auth";
 import Logout from "./components/auth/Logout";
 import Favorites from "./components/favorites/Favorites";
@@ -22,15 +22,15 @@ const Tab = createBottomTabNavigator();
 
 const routeIcons = {
   "Home": "home",
-  "Delays": "time",
-  "DelaysList": "list",
+  "DelaysMap": "time",
+  "Delays": "list",
   "Logga in": "lock-closed",
   "Logga ut": "log-out",
   "Favorites": "heart",
 };
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
 
 //   useEffect(async () => {
 //     setIsLoggedIn(await authModel.loggedIn());
@@ -54,12 +54,13 @@ useEffect(() => {
             },
             tabBarActiveTintColor: 'blue',
             tabBarInactiveTintColor: 'gray',
+            headerShown: false
           })}
         >
           <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Delays" component={DelaysMap} />
+          <Tab.Screen name="DelaysMap" component={DelaysMap} />
           
-          <Tab.Screen name="DelaysList" component={DelaysList} />
+          <Tab.Screen name="Delays" component={DelaysList} />
           {isLoggedIn ? 
               <Tab.Screen name="Favorites" component={Favorites} />
               :

@@ -1,8 +1,6 @@
 import config from "../config/config.json";
 import storage from "./storage";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const auth = {
     loggedIn: async function loggedIn() {
         const tokenAndDate = storage.readToken();
@@ -68,6 +66,5 @@ const auth = {
         await storage.deleteToken(); 
     }
 };
-
 
 export default auth;

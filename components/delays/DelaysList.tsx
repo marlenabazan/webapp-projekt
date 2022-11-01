@@ -6,7 +6,6 @@ import { Base, Typography } from '../../styles';
 
 import delaysModel from '../../models/delays';
 
-
 export default function DelaysList({ route, navigation }) {
     const [allDelays, setAllDelays] = useState([]);
     const [stationsNames, setStationsNames] = useState({});
@@ -26,7 +25,11 @@ export default function DelaysList({ route, navigation }) {
 
         return <View key={index}>
                     <View>
-                        <TouchableOpacity onPress={() => console.log("click")}>
+                        <TouchableOpacity onPress={() => 
+                            navigation.navigate('UseTime', {
+                                delay: delay
+                            })
+                            }>
                             <Text style={Typography.header1}>
                                 <Text>{stationName} </Text>
                                 <Text>-&gt; {toStationName} </Text>

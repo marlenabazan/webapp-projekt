@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const container = {
     flex: 1,
+    paddingTop: 60,
 };
 
 export const base = {
@@ -44,4 +45,11 @@ export const separator2 = {
 
 export const stationButton = {
     display: 'flex', justifyContent: 'flex-end'
+}
+
+export const home = {
+    flex: 1,
+    backgroundColor: '#edf3f9',
+    alignItems: 'center',
+    justifyContent: 'center',
 }

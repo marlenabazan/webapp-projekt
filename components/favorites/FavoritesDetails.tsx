@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity } from "react-native";
-
 import moment from 'moment';
 
 import { Base, Typography } from '../../styles';
 
 import delaysModel from '../../models/delays';
-
 
 export default function FavoritesDetails({ route, navigation }) {
     const [delayDetails, setDelayDetails] = useState([]);
@@ -14,7 +12,6 @@ export default function FavoritesDetails({ route, navigation }) {
 
     useEffect(() => {
         (async () => {           
-            // const results = await delaysModel.getAllDelaysFromStation(route.params.station);
             setDelayDetails(await delaysModel.getAllDelaysFromStation(route.params.station));
             setStationsNames(await delaysModel.getStationsNames());
         })();
@@ -23,11 +20,15 @@ export default function FavoritesDetails({ route, navigation }) {
     const details = delayDetails.map((delay, index) => {
         let toStationName = stationsNames[delay.ToLocation[0].LocationName];
         let oldTime = moment(delay.AdvertisedTimeAtLocation).format('HH:mm');
-        let newTime = moment(delay.EstimatedTimeAtLocation).format('HH:mm');
+        let newTime = moment(delay.EstimatedTimeAtLocation).format('HH:mm');      
 
         return <View key={index}>
                     <View>
-                        <TouchableOpacity onPress={() => console.log("click")}>
+                        <TouchableOpacity onPress={() => 
+                            navigation.navigate('UseTime', {
+                                delay: delay
+                            })
+                            }>
                             <Text style={Typography.header1}>
                                 <Text>-&gt; {toStationName} </Text>
                             </Text> 
@@ -45,7 +46,7 @@ export default function FavoritesDetails({ route, navigation }) {
 
     return <ScrollView>
         <Text style={Typography.header2}> Förseningar från {stationsNames[route.params.station]}</Text>
-            {details.length ? details : <Text>inga</Text>}
-        {/* {details} */}
+            {details.length ? details : <Text style={Typography.info}>Inga förseningar </Text>}
         </ScrollView>
 };
+ 

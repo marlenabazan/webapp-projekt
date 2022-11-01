@@ -53,3 +53,12 @@ export const oldTime = {
 export const stationName = {
     fontWeight: 'bold'
 }
+
+export const homeHeader = {
+    color: '#333',
+    fontSize: 70,
+    padding: 12,
+    paddingBottom: 0,
+    textAlign: 'center',
+    fontStyle: 'italic',
+};

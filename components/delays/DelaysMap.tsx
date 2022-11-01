@@ -10,27 +10,12 @@ import * as Location from 'expo-location';
 
 import delaysModel from '../../models/delays';
 
-
 export default function DelaysMap({ route, navigation }) {
     const [allDelays, setAllDelays] = useState([]);
     const [locationMarker, setLocationMarker] = useState(null);
     const [stationsNames, setStationsNames] = useState({});
 
     const map = useRef(null);
-
-    // if (reload) {
-    //     reloadDelays();
-    // }
-
-    // async function reloadDelays() {
-    //     setAllDelays(await delaysModel.getDelayedStations());
-    // }
-
-    // useEffect(() => {
-    //     (async () => {
-    //         reloadDelays();
-    //     })();
-    // }, []);
 
     useEffect(() => {
         (async () => {
@@ -95,11 +80,10 @@ export default function DelaysMap({ route, navigation }) {
                 </Marker>
     });
 
-
     return (
         <View style={Base.base}>
             <Text style={Typography.normal}>* För att se alla förseningar gå till 
-                <TouchableOpacity onPress={() => navigation.navigate('DelaysList')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Delays')}>
                     <Text style={Base.link}>        lista</Text>
                 </TouchableOpacity> 
             </Text>
