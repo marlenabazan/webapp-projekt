@@ -22,10 +22,10 @@ const Tab = createBottomTabNavigator();
 
 const routeIcons = {
   "Home": "home",
-  "DelaysMap": "time",
+  "Delays Map": "time",
   "Delays": "list",
-  "Logga in": "lock-closed",
-  "Logga ut": "log-out",
+  "Log in": "lock-closed",
+  "Log out": "log-out",
   "Favorites": "heart",
 };
 
@@ -58,18 +58,18 @@ useEffect(() => {
           })}
         >
           <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="DelaysMap" component={DelaysMap} />
+          <Tab.Screen name="Delays Map" component={DelaysMap} />
           
           <Tab.Screen name="Delays" component={DelaysList} />
           {isLoggedIn ? 
               <Tab.Screen name="Favorites" component={Favorites} />
               :
-              <Tab.Screen name="Logga in">
+              <Tab.Screen name="Log in">
                   { () => <Auth setIsLoggedIn={setIsLoggedIn} /> }
               </Tab.Screen>
           }
           {isLoggedIn ? 
-              <Tab.Screen name="Logga ut">
+              <Tab.Screen name="Log out">
               { () => <Logout setIsLoggedIn={setIsLoggedIn} /> }
           </Tab.Screen> : null
           }
